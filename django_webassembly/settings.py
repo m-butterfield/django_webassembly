@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["localhost", "testserver"]
 # Application definition
 
 INSTALLED_APPS = [
+    "django_webassembly.polls.apps.PollsConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
