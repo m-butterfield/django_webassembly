@@ -23,6 +23,7 @@ const main = async () => {
 };
 
 main().catch((e) => {
+  debugger;
   alert(`Error: ${e}`);
 });
 
