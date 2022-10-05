@@ -1,11 +1,10 @@
 {
   "name": "django_webassembly",
-  "version": "1.0.0",
-  "main": "index.js",
   "author": "Matt Butterfield <matt@mattbutterfield.com>",
-  "license": "MIT",
   "dependencies": {
     "eslint": "^8.24.0",
-    "pyodide": "^0.21.3"
-  }
+    "pyodide": "^0.21.3",
+    "xhr-shim": "^0.1.3"
+  },
+  "repository": "https://github.com/m-butterfield/django_webassembly.git"
 }
