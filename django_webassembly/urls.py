@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from django_webassembly.django_webassembly import views
+from django_webassembly import views
 
 urlpatterns = [
     path("", views.index, name="index"),
