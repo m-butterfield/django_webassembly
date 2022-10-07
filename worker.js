@@ -20,6 +20,7 @@ const setupPyodide = async () => {
   pyodide = await loadPyodide();
   await pyodide.loadPackage("micropip");
   const micropip = pyodide.pyimport("micropip");
+  await micropip.install("tzdata");
   await micropip.install("/wheel/django_webassembly-0.1.0-py3-none-any.whl");
   pyodide.runPython(await (await fetch("/init.py")).text());
   pyodide.runPython(`
