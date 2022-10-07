@@ -39,14 +39,23 @@ self.addEventListener("fetch", event => {
   } else {
     const method = event.request.method.toLowerCase();
     const reqHeaders = event.request.headers;
+    console.log(JSON.stringify(reqHeaders));
     const response = pyodide.runPython(`
       response = app.${method}("${event.request.url}", expect_errors=True) # , headers=${JSON.stringify(reqHeaders)})
-      response.text`
+      try:
+          body = response.text
+      except UnicodeDecodeError:
+          body = response.body
+      body`
     );
-    const respHeaders = JSON.parse(pyodide.runPython(`
+    const headersPy = pyodide.runPython(`
       import json
-      json.dumps(dict(response.headers))`));
-    const status = pyodide.runPython(`response.status_code`)
+      json.dumps(dict(response.headers))`);
+    const respHeaders = JSON.parse(headersPy);
+    if (respHeaders["Content-Type"] === "application/octet-stream" && event.request.url.endsWith(".woff")) {
+      respHeaders["Content-Type"] = "application/font-woff";
+    }
+    const status = pyodide.runPython("response.status_code");
 
     event.respondWith(
       new Response(response, {headers: respHeaders, status: status})

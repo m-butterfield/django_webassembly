@@ -34,6 +34,7 @@ user.save()
 
 # hack to bypass auth in admin
 from django_webassembly.polls.admin import admin
+
 admin.site.has_permission = lambda r: setattr(r, "user", user) or True
 
 # set up the app we'll use to serve requests
