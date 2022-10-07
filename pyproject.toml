@@ -7,6 +7,7 @@ authors = ["Matt Butterfield <matt@mattbutterfield.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 Django = "^4.1.1"
+WebTest = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.8.0"

@@ -23,9 +23,6 @@ const setupPyodide = async () => {
   await micropip.install("tzdata");
   await micropip.install("/wheel/django_webassembly-0.1.0-py3-none-any.whl");
   pyodide.runPython(await (await fetch("/init.py")).text());
-  pyodide.runPython(`
-    from django.test import Client
-    c = Client()`);
   loaded = true;
 };
 
@@ -43,8 +40,8 @@ self.addEventListener("fetch", event => {
     const method = event.request.method.toLowerCase();
     const reqHeaders = event.request.headers;
     const response = pyodide.runPython(`
-      response = c.${method}("${event.request.url}") # , headers=${JSON.stringify(reqHeaders)})
-      response.content.decode()`
+      response = app.${method}("${event.request.url}", expect_errors=True) # , headers=${JSON.stringify(reqHeaders)})
+      response.text`
     );
     const respHeaders = JSON.parse(pyodide.runPython(`
       import json
