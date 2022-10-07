@@ -29,4 +29,9 @@ MigrateCommand().handle(
 
 from django.contrib.auth.models import User
 
-User(username="matt", is_staff=True, is_active=True).save()
+user = User(username="matt", is_staff=True, is_active=True)
+user.save()
+
+# hack to bypass auth in admin
+from django_webassembly.polls.admin import admin
+admin.site.has_permission = lambda r: setattr(r, "user", user) or True

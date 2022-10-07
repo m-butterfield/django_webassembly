@@ -50,7 +50,6 @@ self.addEventListener("fetch", event => {
       import json
       json.dumps(dict(response.headers))`));
     const status = pyodide.runPython(`response.status_code`)
-    console.log(status)
 
     event.respondWith(
       new Response(response, {headers: respHeaders, status: status})
