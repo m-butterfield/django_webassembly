@@ -38,8 +38,8 @@ self.addEventListener("fetch", event => {
     );
   } else {
     const method = event.request.method.toLowerCase();
+    console.log(event.request.headers);
     const reqHeaders = event.request.headers;
-    console.log(JSON.stringify(reqHeaders));
     const response = pyodide.runPython(`
       response = app.${method}("${event.request.url}", expect_errors=True) # , headers=${JSON.stringify(reqHeaders)})
       try:
