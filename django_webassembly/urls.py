@@ -14,13 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, re_path
+from django.urls import include, path
 
 from django_webassembly import views
 
 urlpatterns = [
     # optional django_webassembly prefix for running on github pages
-    re_path(r"(?:django_webassembly\/?)?$", views.index, name="index"),
-    re_path("(?:django_webassembly\/)?admin/", admin.site.urls),
-    re_path("(?:django_webassembly\/)?polls/", include("django_webassembly.polls.urls")),
+    path("", views.index, name="index"),
+    path("admin/", admin.site.urls),
+    path("polls/", include("django_webassembly.polls.urls")),
 ]
