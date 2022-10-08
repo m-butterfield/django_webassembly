@@ -40,7 +40,6 @@ const djangoRequest = async request => {
     ...request.headers,
     Cookie: cookie,
   };
-  console.log(reqHeaders);
 
   const method = request.method.toLowerCase();
   let params = "";
@@ -48,7 +47,7 @@ const djangoRequest = async request => {
     params = await request.text();
   }
 
-  const response = pyodide.runPython(`
+  let response = pyodide.runPython(`
       response = app.${method}(
           "${request.url}",
           params="${params}",
@@ -58,13 +57,20 @@ const djangoRequest = async request => {
       try:
           body = response.text
       except UnicodeDecodeError:
-          body = response.body
+          body = [b for b in response.body]
       body`
   );
+  if (typeof response === "object") {
+    // response is binary data
+    response = new Uint8Array(response);
+  }
   const headersPy = pyodide.runPython(`
       import json
       json.dumps(dict(response.headers))`);
   const respHeaders = JSON.parse(headersPy);
+
+  // we cannot access the cookies of the intercepted requests coming in, so save
+  // them now as they come back from django to use for building subsequent requests.
   const setCookie = respHeaders["Set-Cookie"];
   if (setCookie) {
     // only setting first one right now
@@ -72,7 +78,7 @@ const djangoRequest = async request => {
     cookies[nameValue[0].trim()] = nameValue[1];
   }
   if (respHeaders["Content-Type"] === "application/octet-stream" && request.url.endsWith(".woff")) {
-    respHeaders["Content-Type"] = "application/font-woff";
+    respHeaders["Content-Type"] = "font/woff";
   }
   const status = pyodide.runPython("response.status_code");
 
