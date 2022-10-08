@@ -17,14 +17,16 @@ Putting these concepts together, and heavily inspired by a similar approach with
 It means you can host a Django application using only static files, like the example linked above using Github Pages.
 Of course, there's no shared database, just a local SQLite db that lives in your browser.
 Perhaps that could also be staticly hosted and shared somewhere 🤷‍♂️.
-A more immediately practical application could be to make a Django app work offline, sending updates back to the server when the connection is restored.
+A more immediate practical use could be to make a Django app work offline, sending updates back to the server when the connection is restored.
 
 ### How does this work?
 
 This repo contains the `django_webassembly` app.
 This can can be run like any other django app (`python manage.py runserver`), or you can simply host the static files.
 The easiest way to do this is to run `python -m http.server` and open [http://localhost:8000](http://localhost:8000).
-When running this way, the app is loaded and installed as a [wheel](https://packaging.python.org/en/latest/glossary/#term-Wheel), so you have to rebuild the wheel if you want to see your changes. You can do that by running `make wheel`.
+When running this way, the app is loaded and installed as a [wheel](https://packaging.python.org/en/latest/glossary/#term-Wheel), so you have to rebuild the wheel if you want to see your changes.
+You can do that by running `make wheel`.
+The service worker also needs to be reloaded.
 
 The details of how this works can be seen in `app.js`, which loads the service worker, and `worker.js` which contains the service worker code.
 The service worker loads Pyodide, installs Python dependencies and the django_webassembly app, then runs some setup code in `init.py`.
