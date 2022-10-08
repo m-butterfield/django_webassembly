@@ -1,16 +1,17 @@
-// importScripts("https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js");
-// xhr-shim to allow XMLHttpRequest in service worker
-// importScripts("https://cdn.jsdelivr.net/npm/xhr-shim@0.1.3/src/index.min.js");
+importScripts("https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js");
+importScripts("https://cdn.jsdelivr.net/npm/xhr-shim@0.1.3/src/index.min.js");
 
 // Uncomment the importScripts calls below to use local versions.
+// importScripts("./node_modules/xhr-shim/src/index.js");
 // Pyodide's npm package doesn't have everything we need.
 // To get a local version run:
 //   wget https://github.com/pyodide/pyodide/releases/download/0.21.3/pyodide-build-0.21.3.tar.bz2
 //   tar -xzvf pyodide-build-0.21.3.tar.bz2
 //   rm pyodide-build-0.21.3.tar.bz2
-importScripts("./pyodide/pyodide.js");
-importScripts("./node_modules/xhr-shim/src/index.js");
+// then uncomment the line below:
+// importScripts("./pyodide/pyodide.js");
 
+// XMLHttpRequest not normally available in service worker. (needed by pyodide)
 self.XMLHttpRequest = self.XMLHttpRequestShim;
 
 let pyodide, loaded;
@@ -73,7 +74,7 @@ const djangoRequest = async request => {
   // them now as they come back from django to use for building subsequent requests.
   const setCookie = respHeaders["Set-Cookie"];
   if (setCookie) {
-    // only setting first one right now
+    // only saving first one right now
     const nameValue = setCookie.split(";")[0].split("=");
     cookies[nameValue[0].trim()] = nameValue[1];
   }
