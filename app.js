@@ -3,7 +3,7 @@ if ("serviceWorker" in navigator) {
     console.log("Service worker registration succeeded:", registration);
     registration.installing?.addEventListener("statechange", (event) => {
       if (event.target.state === "activated") {
-        location.reload();
+        location.href = "/";
       }
     });
   }, (error) => {
