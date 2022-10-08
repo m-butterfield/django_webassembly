@@ -40,7 +40,8 @@ const djangoRequest = async request => {
   const reqHeaders = {
     ...request.headers,
     Cookie: cookie,
-    Referer: "https://django-webassembly.mattbutterfield.com/polls/1/"
+    Referer: "https://django-webassembly.mattbutterfield.com/polls/1/",
+    Origin: "https://django-webassembly.mattbutterfield.com"
   };
 
   const method = request.method.toLowerCase();
