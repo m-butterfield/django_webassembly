@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "testserver", "django-webassembly.mattbutterfield.com"]
 
+CSRF_TRUSTED_ORIGINS = ["https://django-webassembly.mattbutterfield.com"]
+
 
 # Application definition
 

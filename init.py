@@ -42,6 +42,7 @@ user.save()
 
 # add some data for the polls app
 from django_webassembly.polls.models import Choice, Question
+
 q1 = Question(question_text="Dogs or cats?", pub_date=datetime.now())
 q1.save()
 Choice(question=q1, choice_text="dogs").save()
