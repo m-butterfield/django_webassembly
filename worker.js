@@ -45,7 +45,7 @@ const djangoRequest = async request => {
 
   const method = request.method.toLowerCase();
   let params = "";
-  if (method === "post") {
+  if (["post", "put", "patch"].includes(method)) {
     params = await request.text();
   }
 
@@ -85,7 +85,7 @@ const djangoRequest = async request => {
 
   const status = pyodide.runPython("response.status_code");
   if (status === 302 || status === 301) {
-    return Response.redirect(respHeaders["Location"], status)
+    return Response.redirect(respHeaders["Location"], status);
   }
 
   return new Response(response, {headers: respHeaders, status: status});
