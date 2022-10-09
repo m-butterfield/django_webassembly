@@ -6,4 +6,4 @@ def index(request):
 
 
 def favicon(request):
-    return redirect("/static/favicon.ico", permanent=True)
+    return redirect("/static/django_webassembly/favicon.ico", permanent=True)
