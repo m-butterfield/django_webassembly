@@ -2,7 +2,7 @@
 
 Running Django in the browser.
 
-<a href="https://django-webassembly.mattbutterfield.com">Live example hosted directly from this repo on Github Pages.</a>
+<a href="https://django-webassembly.mattbutterfield.com">Live example hosted directly from this repo on Github Pages.</a> - Give it some time to load. There is around 15MB to download and lots of code to run.
 
 ### What is happening?
 
