@@ -32,6 +32,9 @@ self.addEventListener("install", event => {
 });
 
 const djangoRequest = async request => {
+  if (!loaded) {
+    await setupPython();
+  }
   let cookie = "";
   for (const key in cookies) {
     const val = `${key}=${cookies[key]}`;
@@ -92,13 +95,7 @@ const djangoRequest = async request => {
 };
 
 self.addEventListener("fetch", event => {
-  if (!loaded) {
-    event.respondWith(
-      Promise.reject("Python code isn't set up yet, try again in a bit"),
-    );
-  } else {
-    event.respondWith(djangoRequest(event.request));
-  }
+  event.respondWith(djangoRequest(event.request));
 });
 
 self.addEventListener("activate", function (event) {
