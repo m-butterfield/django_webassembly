@@ -2,8 +2,6 @@
 
 Running Django in the browser.
 
-*tested and working on desktop Google Chrome*
-
 <a href="https://django-webassembly.mattbutterfield.com">Live example hosted directly from this repo on Github Pages.</a>
 
 ### What is happening?
@@ -16,8 +14,8 @@ Putting these concepts together, and heavily inspired by a similar approach with
 
 It means you can host a Django application using only static files, like the example linked above using Github Pages.
 Of course, there's no shared database, just a local SQLite db that lives in your browser.
-Perhaps that could also be staticly hosted and shared somewhere 🤷‍♂️.
-A more immediate practical use could be to make a Django app work offline, sending updates back to the server when the connection is restored.
+Perhaps that could also be staticly hosted and shared somewhere...
+A more practical use case could be to make a Django app work offline, sending updates back to the server when the connection is restored.
 
 ### How does this work?
 
@@ -36,8 +34,8 @@ Each request is turned into Python code that calls an app client for django_weba
 ### What happens now?
 
 I've always liked the idea of running Python in the browser, and I really just did this as a proof of concept out of curiousity.
-It's pretty finicky to use and develop so far, and I haven't done much testing or tried to run anything complicated.
-Navigating to links doesn't seem to work on my phone or in Safari, so browser support is questionable.
+It's kind of finicky to use and develop so far, and I haven't done much testing or tried to run anything complicated.
 That being said, I think there are some interesting experiments that can come out of this.
+At the very least, it can be a nice way to showcase a Django app you've written without worrying about deploying it to a running server.
 I'm also interested in trying to run other languages in the browser.
-How about a Go webserver in the browser? 🤔
+What would it take to run a Go webserver in the browser?
