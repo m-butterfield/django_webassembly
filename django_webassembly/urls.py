@@ -21,6 +21,7 @@ from django_webassembly import views
 urlpatterns = [
     # optional django_webassembly prefix for running on github pages
     path("", views.index, name="index"),
+    path("favicon.ico", views.favicon),
     path("admin/", admin.site.urls),
     path("polls/", include("django_webassembly.polls.urls")),
 ]

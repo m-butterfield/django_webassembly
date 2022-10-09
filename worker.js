@@ -82,7 +82,11 @@ const djangoRequest = async request => {
   if (respHeaders["Content-Type"] === "application/octet-stream" && request.url.endsWith(".woff")) {
     respHeaders["Content-Type"] = "font/woff";
   }
+
   const status = pyodide.runPython("response.status_code");
+  if (status === 302 || status === 301) {
+    return Response.redirect(respHeaders["Location"], status)
+  }
 
   return new Response(response, {headers: respHeaders, status: status});
 };
